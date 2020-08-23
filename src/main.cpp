@@ -15,34 +15,67 @@ struct node {
 };
 
 class Linked_List {
-  private: 
+  private:
     node *head, *tail;
-
-  public: 
+  public:
     Linked_List() {
       head = NULL;
       tail = NULL;
-
     }
-    
-    void add_node(int n) {
+
+    // Add element at the end of the list
+    void append(int n) {
       node *temp = new node;
       temp->data = n;
       temp->next = NULL;
 
-      if (head = NULL) {
+      //check if is the first item on the list
+      // make the first and last poiter the same
+      // otherwisde add to tail
+      if (head == NULL) {
         head = temp;
         tail = temp;
-        cout << "testing 123 /n";
+        head->next = tail;
       } else {
         tail->next = temp;
-        tail = tail->next;
-        cout << "testing 321 /n";
+        tail = temp;
+
       }
+
     }
     
+    // Add element at the begging of the list
+    void prepend (int n){
+      node *temp = new node;
+      temp->data = n;
+      temp->next = head;
+      head = temp;
+    }
     
-    /*
+    // Check if the number exist in the list
+   bool has(int n) {
+      node *temp;
+      temp = head;
+      while (temp != NULL && n == temp->data) {
+        return true;
+        temp = temp->next;
+      }
+     return false;
+   }
+
+   int remove(int n) {
+      node *temp;
+      temp = head;
+
+      while (temp != NULL && n == temp->data) {
+
+          //return true;
+       
+        temp = temp->next;
+     }
+
+     return -1;
+   }
 
     void display() {
       node *tmp;
@@ -53,16 +86,25 @@ class Linked_List {
       }
     }
 
-    */
 };
 
 int main(int argc, char *argv[]) {
   Linked_List a;
-  
-// add valuese to the linked list a
-    a.add_node(1);
-//  a.add_node(2);
-//  a.display();
+
+  a.append(7);
+  a.append(12);
+  a.append(79);
+  a.append(67);
+  a.append(23);
+  a.append(11);
+  a.append(80);
+  a.prepend(5);
+  a.prepend(4);
+  a.prepend(3);
+  a.prepend(2);
+  a.display();
+
+  cout << a.has(67) << " " << a.has(100) << endl;
 
   return 0;
 }
